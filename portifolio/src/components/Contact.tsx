@@ -19,7 +19,6 @@ export function Contact() {
         />
         <textarea
           placeholder="Sua Mensagem"
-          rows="4"
           className="mb-4 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-black resize-none text-black"
         ></textarea>
         <button className="p-2 flex-shrink-0 rounded-full bg-black text-white text-button">

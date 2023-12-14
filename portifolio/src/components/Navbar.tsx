@@ -20,14 +20,17 @@ const Navbar = () => {
     },
   ];
 
-  const scrollTo = (to) => {
+  const scrollTo = (to: number) => {
     scroll.scrollTo(to);
   };
 
   const handleScroll = () => {
     const homeSection = document.getElementById("home");
-    const isHomeSectionVisible = homeSection.getBoundingClientRect().top > 0;
-    setShowNavbar(!isHomeSectionVisible);
+
+    if (homeSection) {
+      const isHomeSectionVisible = homeSection.getBoundingClientRect().top > 0;
+      setShowNavbar(!isHomeSectionVisible);
+    }
   };
 
   useEffect(() => {
