@@ -1,0 +1,15 @@
+/* Adicione estas classes no seu arquivo CSS (escrever.module.css) */
+
+@keyframes cursorBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-animar-cursor {
+  animation: cursorBlink 0.8s infinite;
+}
