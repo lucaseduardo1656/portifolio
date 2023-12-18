@@ -16,7 +16,7 @@ const Home = () => {
       <div>
         <Navbar />
       </div>
-      <section id="home" className="relative">
+      <section id="home" className="relative h-screen">
         <BackgroundImage />
         <SlArrowDown className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce" />
         <div className="w-max p-8 bg-white rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center shadow-md">
@@ -28,7 +28,7 @@ const Home = () => {
       </section>
       <section
         id="projects"
-        className="h-screen flex flex-col justify-center items-center"
+        className="h-screen flex flex-col justify-center items-center pt-8"
       >
         <div className="container mx-auto p-4">
           <div className="flex justify-between items-center py-2 md:py-4 md:px-2 pl-2 mx-auto">

@@ -5,7 +5,7 @@ import config from "../../config.json";
 
 const About = () => {
   return (
-    <section id="about" className="py-16 p-4">
+    <section id="about" className="h-screen justify-center p-4">
       <div className="container mx-auto">
         <h2 className="text-3xl text-black font-bold mb-6">- Sobre Mim</h2>
       </div>
