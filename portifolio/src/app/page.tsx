@@ -1,7 +1,6 @@
 // pages/index.js
 import React from "react";
 import BackgroundImage from "../components/BackgroundImage";
-import styles from "../styles/styles.module.css"; // Importe o arquivo de estilo
 import Navbar from "@/components/Navbar";
 import { MaquinaDeEscrever } from "@/components/Escrever";
 import { SlArrowDown } from "react-icons/sl";
@@ -20,7 +19,7 @@ const Home = () => {
       <section id="home" className="relative">
         <BackgroundImage />
         <SlArrowDown className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce" />
-        <div className="p-8 bg-white rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center shadow-md">
+        <div className="w-max p-8 bg-white rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center shadow-md">
           <Profile />
         </div>
       </section>
@@ -31,7 +30,7 @@ const Home = () => {
         id="projects"
         className="h-screen flex flex-col justify-center items-center"
       >
-        <div className="container mx-auto">
+        <div className="container mx-auto p-4">
           <div className="flex justify-between items-center py-2 md:py-4 md:px-2 pl-2 mx-auto">
             <h2 className="text-3xl text-black font-bold mb-6">- Projetos</h2>
             <a
