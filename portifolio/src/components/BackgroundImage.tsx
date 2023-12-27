@@ -9,7 +9,6 @@ const BackgroundImage = () => {
     try {
       const response = await fetch("/images/imageList.json");
       const data = await response.json();
-      console.log(data);
       setImageList(data);
       setLoading(false);
     } catch (error) {
@@ -28,11 +27,10 @@ const BackgroundImage = () => {
 
   return (
     <div
-      className="bg-cover bg-center w-full h-screen"
+      className="bg-cover bg-center w-full h-screen transition-opacity duration-1000 ease-in-out"
       style={{
         backgroundImage: `url(${getRandomImage()})`,
         opacity: loading ? 0.0 : 1,
-        transition: "opacity 1s ease-in-out",
       }}
     />
   );

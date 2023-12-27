@@ -70,7 +70,7 @@ const GitHubProjects: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto py-4">
+    <div>
       {projects.length > 0 && (
         <Carousel
           responsive={responsive}
@@ -78,27 +78,30 @@ const GitHubProjects: React.FC = () => {
           showDots={true}
           arrows={false}
           itemClass="px-3"
-          autoPlay={true} // Autoplay ativado
+          autoPlay={true}
           autoPlaySpeed={9000}
           customDot={<CustomDot onClick={undefined} active={false} />}
         >
           {projects.map((project) => (
             <div
               key={project.id}
-              className="flex flex-col p-4 bg-white rounded-lg h-full"
+              className="flex flex-col p-4 bg-white dark:bg-black rounded-lg h-full shadow-md"
             >
               <div className="flex items-center justify-center">
-                <div className="w-2/4 h-56 bg-black rounded-lg flex items-center justify-center">
-                  <BsFillGrid1X2Fill className="fill-white" size={24} />
+                <div className="w-2/4 h-56 bg-black dark:bg-white rounded-lg flex items-center justify-center">
+                  <BsFillGrid1X2Fill
+                    className="fill-white dark:fill-black"
+                    size={24}
+                  />
                 </div>
               </div>
-              <h2 className="text-lg font-bold text-black py-2">
+              <h2 className="dark:text-white text-lg font-bold text-black py-2">
                 {project.name}
               </h2>
-              <p className="text-gray-600 mb-2">
+              <p className="dark:text-white text-gray-600 mb-2">
                 {project.description || "Sem descrição disponível."}
               </p>
-              <p className="text-gray-600 mb-2">
+              <p className="dark:text-white text-gray-600 mb-2">
                 <strong>Linguagem:</strong>{" "}
                 {project.language || "Não especificada"}
               </p>
@@ -118,7 +121,7 @@ const GitHubProjects: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <button className="p-2 bg-green-500 text-white rounded-lg ml-2">
+                    <button className="p-2 bg-green text-white rounded-lg ml-2">
                       Preview
                     </button>
                   </a>

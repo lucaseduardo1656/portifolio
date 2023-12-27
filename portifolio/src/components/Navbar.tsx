@@ -1,11 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import { IoSunnySharp } from "react-icons/io5";
+import { IoIosMoon } from "react-icons/io";
+import config from "../../config.json";
 
 const Navbar = () => {
-  const [showNavbar, setShowNavbar] = useState(true);
-
   const links = [
+    {
+      name: "Home",
+      to: "home",
+    },
     {
       name: "About",
       to: "about",
@@ -24,56 +29,96 @@ const Navbar = () => {
     scroll.scrollTo(to);
   };
 
-  const handleScroll = () => {
-    const homeSection = document.getElementById("home");
+  const element = document.documentElement;
+  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
+  );
 
-    if (homeSection) {
-      const isHomeSectionVisible = homeSection.getBoundingClientRect().top > 0;
-      setShowNavbar(!isHomeSectionVisible);
+  function onWindowMatch() {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) && darkQuery?.matches)
+    ) {
+      element.classList.add("dark");
+    } else {
+      element.classList.remove("dark");
+    }
+  }
+  onWindowMatch();
+
+  useEffect(() => {
+    switch (theme) {
+      case "dark":
+        {
+          element.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+          console.log("dark theme");
+        }
+        break;
+      case "light":
+        {
+          element.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+          console.log("light theme");
+        }
+        break;
+      default: {
+        localStorage.removeItem("theme");
+        onWindowMatch();
+        console.log("system theme");
+      }
+    }
+  }, [theme]);
+
+  darkQuery.addEventListener("change", onWindowMatch);
+
+  const handleThemeChange = (
+    selectedTheme: React.SetStateAction<string | null>
+  ) => {
+    if (selectedTheme === "dark" || selectedTheme === "light") {
+      setTheme(selectedTheme);
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <>
-      <nav
-        className={
-          "bg-white rounded-xl border-gray-200 z-50 shadow-lg md:px-8 px-4 py-2 w-full w-80 sm:w-1/2 fixed top-4 left-1/2 transform -translate-x-1/2"
-        }
-      >
-        <div className="flex items-center justify-between mx-auto px-4">
-          <div className="flex items-center cursor-pointer">
-            <ScrollLink to="home" spy={true} smooth={true} duration={500}>
-              <span className="text-xl font-medium text-decoration-none whitespace-nowrap text-black">
-                {`<Lucas/>`}
-              </span>
-            </ScrollLink>
-          </div>
-          <ul className="flex flex-row space-x-4 md:space-x-8 md:mt-0 md:text-md md:font-medium">
+    <header className="z-[999] relative">
+      <nav className="fixed transition transform -translate-x-1/2 top-0 left-1/2 h-[4.5rem] w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] sm:top-6 sm:h-[3.25rem] sm:w-[36rem] sm:rounded-full dark:bg-black dark:border-stone dark:bg-opacity-75">
+        <div className=" flex fixed left-1/2 h-12 -translate-x-1/2 py-2  sm:h-[initial] sm:py-0">
+          <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-5">
             {links.map((link, index) => (
-              <li key={index} className="cursor-pointer">
+              <li
+                key={index}
+                className="cursor-pointer h-3/4 flex items-center justify-center relative"
+              >
                 <ScrollLink
                   to={link.to}
                   spy={true}
                   smooth={true}
                   duration={500}
                 >
-                  <span className="inline-block border-b-2 text-gray-400 border-transparent rounded-t-lg hover:text-black hover:border-black dark:hover:text-black">
+                  <span className="flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-white dark:hover:text-white">
                     {link.name}
                   </span>
                 </ScrollLink>
               </li>
             ))}
+            <button
+              className="dark:hidden"
+              onClick={() => handleThemeChange("dark")}
+            >
+              <IoIosMoon class="fill-gray-400 hover:fill-black" />
+            </button>
+            <button
+              className="hidden dark:block"
+              onClick={() => handleThemeChange("light")}
+            >
+              <IoSunnySharp class="fill-white hover:fill-white" />
+            </button>
           </ul>
         </div>
       </nav>
-    </>
+    </header>
   );
 };
 
